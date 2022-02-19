@@ -9,6 +9,7 @@ import {
 } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import Options from './Options';
+import { ford, vw, audi } from '../../setup';
 
 const schema = yup.object().shape({
   fullName: yup
@@ -30,18 +31,25 @@ const schema = yup.object().shape({
   endDate: yup
     .date()
     .default(() => new Date().toLocaleDateString('en-us'))
-    .min(new Date() + 1, 'Please pick a future date'),
+    .min(new Date(), 'Please pick a future date'),
 });
 
 export default function RentalForm({ setData, data, setRedirect }) {
-  const [carModel, setCarModel] = useState('');
+  const [carModel, setCarModel] = useState({});
 
-  useEffect(() => {
-    console.log(carModel);
-  }, [carModel]);
+  const handleCarChange = (e) => {
+    if (e === 'ford') {
+      setCarModel(ford);
+    } else if (e === 'vw') {
+      setCarModel(vw);
+    } else if (e === 'audi') {
+      setCarModel(audi);
+    }
+  };
+
   return (
     <div className='container'>
-      <h1>Pro Rent</h1>
+      <h1>pro rent</h1>
       <Formik
         initialValues={{
           fullName: '',
@@ -158,7 +166,10 @@ export default function RentalForm({ setData, data, setRedirect }) {
                 className='field model'
                 name='model'
                 onBlur={props.handleBlur}
-                onChange={setCarModel(props)}
+                onChange={(e) => {
+                  props.handleChange(e);
+                  handleCarChange(e.target.value);
+                }}
                 value={props.values.model}
                 isValid={props.touched.model && !props.errors.model}
                 isInvalid={!!props.errors.model}
@@ -168,7 +179,7 @@ export default function RentalForm({ setData, data, setRedirect }) {
                 <option value='vw'>VW Golf</option>
                 <option value='audi'>Audi Q3</option>
               </FormSelect>
-              <Button classname='btn' variant='primary' type='submit'>
+              <Button className='btn' variant='primary' type='submit'>
                 submit your order
               </Button>
             </Form>

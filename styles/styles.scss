@@ -12,31 +12,36 @@ html {
 }
 
 body {
+  min-height: 100%;
   margin: 0;
   border: 0;
   box-sizing: border-box;
   font-family: $font-stack;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   background-color: $background-color !important;
 }
 
 .container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-content: center;
+  max-width: 50% !important;
+
+  h1,
+  h4 {
+    color: $text-color;
+    font-variant: $font-variant;
+    text-align: center;
+  }
 
   //Rental Form
 
   .form-container {
-    height: fit-content;
+    height: 100%;
+    width: 100%;
     margin: 2%;
     padding: 2% 1%;
     border: 4px solid $border-color;
     border-radius: 5px;
 
     .field {
+      margin-block: 0.5rem;
       padding-block: 0.5rem;
       padding-inline-end: 0.2rem;
     }
@@ -48,19 +53,30 @@ body {
     }
   }
 
-  .email-field {
-    margin-bottom: 1em;
-  }
-
   .invalid-feedback {
     padding-inline-start: 0.2rem;
   }
 
-  .submit-btn {
-    font-size: 1.2em;
+  .btn {
     font-variant: $font-variant;
     font-family: $font-stack;
-    letter-spacing: 0.1em;
+    margin-top: 0.4rem;
+  }
+}
+
+//car specs
+
+.car-specs {
+  text-align: center;
+
+  h3,
+  p {
+    font-variant: $font-variant;
+    color: $text-color;
+  }
+
+  .price {
     font-weight: 500;
+    font-size: 1.2rem;
   }
 }

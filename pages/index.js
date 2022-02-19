@@ -8,7 +8,6 @@ export default function Home() {
 
   useEffect(() => {
     if (hasSubmitted) {
-      console.log(formData);
       Router.push('/thank-you');
     }
   });
